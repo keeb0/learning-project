@@ -1,0 +1,46 @@
+.main_content{
+	padding: 30px 150px;
+}
+.user_photo_block{
+	float: left;
+	padding-top: 20px;
+}
+.user_photo_block img{
+	height: 230px;
+}
+.new_photo_form{
+	margin-top: 30px;
+}
+.new_photo_form *{
+	display: block;
+	margin-top: 10px;
+}
+.user_dates_block{
+	margin-left: auto;
+}
+.field{
+	margin-top: 20px;
+	text-align:right; 
+	line-height: 35px;
+}
+.pswd_inputs{
+	margin-right: 28px;
+}
+#photo_new{
+	border:1px solid #e6e6e6;
+}
+.buttons{
+	border-radius: 5px;
+	padding: 6px;
+	border:1px solid #FFE544;
+	background-color: #FFE544;
+}
+.commit{
+	background-color: #3289DF;
+	border:1px solid #3289DF;
+	color: #fff;
+}
+
+.messege{
+	width: 300px;
+}
