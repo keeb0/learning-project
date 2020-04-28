@@ -7,49 +7,60 @@ class Controller_Profile extends Controller
 	{
 		parent::__construct();
 
-		$this->meta_files = "<script type='text/javascript' src='/web/js/script.js' defer></script>
-			<link rel='stylesheet' type='text/css' href='/web/css/forms-profile.css'>";
+		$this->scripts[] = 'script.js';
+		$this->styles[] ='forms-profile.css';
 	}
 
 	function action_index()
 	{
 		$this->title = 'Личный кабинет';
 		$this->own_view_path = 'profile-edit-view.php';
+		$error_messege = null;
 
 		if(!isset($_SESSION['user_id']))
 			$this->go_home();
 
+		// *********Блок кода с модулем аватарки пользователя*********
 		$user_avatar = new Model_User_Avatar($this->user);
 		$user_avatar->get_user_avatar();
 
-		if(!isset($_SESSION['user_id']))
-			go_home();
-
-		$messege = null;
-		if(!empty($_POST))
-		{
-			$user_edit = new Model_User_Edit($_POST);
-
-			$messege = $user_edit->update_info($this->user->id, $this->user->login);
-		}
-		
 		if (!empty($_FILES)) 
 		{
 			list($file_name, ) = each($_FILES);
 			
 			if(!empty($_FILES[$file_name]['tmp_name']))
 			{
-				$messege = $user_avatar->upload_user_avatar($_FILES[$file_name], $this->user->id);
+				$error_messege = $user_avatar->upload_user_avatar($_FILES[$file_name], $this->user->user_id);
 			}
 		}
+		
+		// *********Блок кода с модулем данных пользователя*********
+		if(!empty($_POST))
+		{
+			$user_updating = new Model_User($_POST);
 
-		$messege == 1 ? header("Location: profile") : 0;
+			if(isset($user_updating->login) || isset($user_updating->email))
+				$error_messege = $user_updating->update_data($this->user->user_id);
 
+			elseif(!empty($user_updating->pswd))
+			{
+				$user_updating->login = $this->user->login;
+
+				if($user_updating->verify_pswd())
+					$error_messege = $user_updating->update_pswd($this->user->user_id);
+				else
+					$error_messege['pswd'] = 'Не верный пароль';
+			}
+			else
+				$error_messege['pswd'] = 'Введите пароль';
+		}
+		
 		$this->data = array(
-			'meta_files' => $this->meta_files,
+			'styles' => $this->styles,
+			'scripts' => $this->scripts,
 			'user' => $this->user,
 			'avatar' => $user_avatar->path,
-			'messege' => $messege
+			'error_messege' => $error_messege
 		);
 
 		$this->view->generate($this->title, $this->own_view_path, $this->template_view_path, $this->data);
@@ -74,7 +85,7 @@ class Controller_Profile extends Controller
 		$user_avatar->get_user_avatar();
 
 		$this->data = array(
-			'meta_files' => $this->meta_files,
+			'styles' => $this->styles,
 			'user' => $this->user,
 			'avatar' => $user_avatar->path,
 			'desired_user' => array(

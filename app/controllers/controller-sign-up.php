@@ -5,7 +5,8 @@ class Controller_Sign_Up extends Controller
 	{
 		parent::__construct();
 
-		$this->meta_files = "<link rel='stylesheet' type='text/css' href='/web/css/forms-login-sign-up.css'>";
+		$this->styles[] = 'forms-login-sign-up.css';
+		$this->scripts[] = 'script-sign-up.js';
 	}
 	function action_index()
 	{
@@ -15,22 +16,21 @@ class Controller_Sign_Up extends Controller
 		if(isset($_SESSION['user_id']))
 			$this->go_home();
 
-		$messege = NULL;
+		$error_messege = NULL;
 		if(!empty($_POST))
 		{
-			$guest = new Model_Guest($_POST);
-			$messege = $guest->create_user();
+			$new_user = new Model_User($_POST);
+			$error_messege = $new_user->create_user();
 
 			// Успешная регистрация
-			if($messege == 1)
-			{
+			if($error_messege === 1)
 				$this->go_home();
-			}
 		}
 
 		$this->data = array(
-			'meta_files' => $this->meta_files,
-			'messege' => $messege
+			'styles' => $this->styles,
+			'scripts' => $this->scripts,
+			'error_messege' => $error_messege
 		);
 		$this->view->generate($this->title, $this->own_view_path, $this->template_view_path, $this->data);
 	}

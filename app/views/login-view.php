@@ -15,6 +15,6 @@
 	</div>
 
 	<div class="field">
-		<?php !empty($data) ? print $data['messege'] : ""; ?>
+		<?php !empty($data) ? print $data['error_messege'] : ""; ?>
 	</div>
 </form>

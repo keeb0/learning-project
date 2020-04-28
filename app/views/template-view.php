@@ -5,7 +5,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" type="text/css" href="/web/css/main.css">
 	<?php
-	isset($data['meta_files']) ? print $data['meta_files'] : 0;
+	if(!empty($data['scripts']))
+	{
+		foreach($data['scripts'] as $key => $value)
+			echo "<script src='web/js/".$value."'></script>";
+	}
+	if(!empty($data['styles']))
+	{
+		foreach($data['styles'] as $key => $value)
+			echo "<link rel='stylesheet' type='text/css' href='/web/css/".$value."'>";
+	}
 	?>
 </head>
 <body>
@@ -38,16 +47,14 @@
 		</div>	
 	</header>
 	<div class="container">
-		<section class="">
-			<div class=" main_content_block">
-				<div class="header_of_content">
-					<?php echo $title; ?>
-				</div>
-				<div class="main_content">
-					<?php require_once 'app/views/'.$content_view;?>
-				</div>
+		<div class=" main_content_block">
+			<div class="header_of_content">
+				<?php echo $title; ?>
 			</div>
-	</section>
+			<div class="main_content">
+				<?php require_once 'app/views/'.$content_view;?>
+			</div>
+		</div>
 	</div>
 	
 </body>

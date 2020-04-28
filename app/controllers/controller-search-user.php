@@ -5,7 +5,7 @@ class Controller_Search_User extends Controller
 	{
 		$this->title = 'Поиск пользователя';
 		$this->own_view_path = 'search-user-view.php';
-		$this->style_files .= "search-user.css'>";
+		$this->styles[] = 'search-user.css';
 		
 		$searching_user = new Model_Search_User;
 
@@ -16,9 +16,9 @@ class Controller_Search_User extends Controller
 // print_r($searching_user);
 		// $searching_user->connection->close();
 		$this->data = array(
-			'meta_files' => $this->style_files,
+			'styles' => $this->styles,
 			'user' => $this->user,
-			'messege' => $searching_user->messege,
+			'error_messege' => $searching_user->error_messege,
 			'logins' => $searching_user->logins,
 			'id' => $searching_user->id);
 
