@@ -4,12 +4,10 @@ class Controller
 	public $view;
 	public $model;
 	public $user;
-	public $data;
-	public $title;
 	public $template_view_path = 'template-view.php';
 	public $own_view_path;
-	public $style_files = "<link rel='stylesheet' type='text/css' href='/web/css/";
-	public $meta_files;
+	public $title;
+	public $data;
 
 	function __construct()
 	{

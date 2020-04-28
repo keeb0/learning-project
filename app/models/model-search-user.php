@@ -7,7 +7,7 @@ class Model_Search_User extends Model
 	{
 		$desired_user_data .= '%';
 
-		$stmt = $this->connection->prepare("
+		$stmt = self::$connection->prepare("
 			SELECT login, id
 			FROM users
 			WHERE login LIKE ?");
@@ -15,7 +15,7 @@ class Model_Search_User extends Model
 		$stmt->execute();
 		$result_set = $stmt->get_result();
 		$amount_of_users = $result_set->num_rows;
-		$this->connection->close();
+		self::$connection->close();
 
 		for($i = 0; $i < $amount_of_users; $i++)
 		{
@@ -24,7 +24,7 @@ class Model_Search_User extends Model
 			$this->id[$i] = $this->row[$i]['id'];
 		}
 		if(empty($this->logins))
-			$this->messege = 'Не найдено совпадений по вашему запросу';
+			$this->error_messege = 'Не найдено совпадений по вашему запросу';
 
 	}
 }

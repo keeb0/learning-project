@@ -5,7 +5,7 @@ class Controller_Login extends Controller
 	{
 		parent::__construct();
 
-		$this->meta_files = "<link rel='stylesheet' type='text/css' href='/web/css/forms-login-sign-up.css'>";
+		$this->styles[] = 'forms-login-sign-up.css';
 	}
 	function action_index()
 	{
@@ -14,22 +14,34 @@ class Controller_Login extends Controller
 		if(isset($_SESSION['user_id']))
 			$this->go_home();
 
-		$messege = NULL;
+		$error_messege = NULL;
 		if(!empty($_POST))
 		{
-			$guest = new Model_Guest($_POST);
-			$messege = $guest->verify();
-
-			// Успешная авторизация
-			if($messege == 1)
+			if(!empty($_POST['login'])
+				&& !empty($_POST['pswd']))
 			{
-				$this->go_home();
+				$guest = new Model_User($_POST);
+				$successful_query = $guest->verify_pswd();
+
+				if($successful_query)
+					{
+						$_SESSION['user_id'] = $successful_query;
+						$this->go_home();
+					}
+				else
+					$error_messege = 'Не верный логин или пароль';
 			}
+			else
+				$error_messege = 'Заполните все поля';
+			
+			// Успешная авторизация
+			if($successful_query == true)
+				$this->go_home();
 		}
 
 		$this->data = array(
-			'meta_files' => $this->meta_files,
-			'messege' => $messege
+			'styles' => $this->styles,
+			'error_messege' => $error_messege
 		);
 		$this->view->generate($this->title, $this->own_view_path, $this->template_view_path, $this->data);
 	}

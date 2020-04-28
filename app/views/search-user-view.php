@@ -6,14 +6,15 @@
 		<input class="buttons" type="submit" value="Поиск">
 	</form>
 </div>
-<div><?php !empty($data['messege']) ? print $data['messege'] : ''; ?></div>
+<div></div>
 <div class="found_user_block">
+	<?php !empty($data['error_messege']) ? print $data['error_messege'] : ''; ?>
 	<?php 
 	if(!empty($data['logins']))
 	{
 		$logins_amount = count($data['logins']);
 		$id = $data['id'];
-		echo "Все найденныепользователи";
+		echo "Все найденные совпадения:";
 		for($i = 0; $i < $logins_amount; $i++)
 		{
 			print "<a class='row' href='/profile/show_user?user_id=$id[$i]'>".$data['logins'][$i]."</a>";

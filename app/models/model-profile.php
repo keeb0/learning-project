@@ -13,8 +13,8 @@ class Model_User_Avatar extends Model_Image
 
 		$this->user = clone $user_data;
 		//photos_main_path - свойство родителя
-		$this->directory_upload = 'web/user-photos/avatars/avatar-'.$this->user->id;
-		$this->directory_get = '/web/user-photos/avatars/avatar-'.$this->user->id;
+		$this->directory_upload = 'web/user-photos/avatars/avatar-'.$this->user->user_id;
+		$this->directory_get = '/web/user-photos/avatars/avatar-'.$this->user->user_id;
 		
 	}
 
@@ -34,7 +34,7 @@ class Model_User_Avatar extends Model_Image
 			mkdir($this->directory_upload);
 
 		// Задаем хэш имя аватарке
-		$this->temp_avatar_name = hash('md5', rand().$this->user->id);
+		$this->temp_avatar_name = hash('md5', rand().$this->user->user_id);
 
 		$success_upload = $this->upload_image($image_dates, $this->temp_avatar_name, $this->directory_upload);
 
@@ -42,12 +42,12 @@ class Model_User_Avatar extends Model_Image
 		{
 			// Запись нового имени аватара в БД
 			$this->temp_avatar_name .= '.'.$this->image_type; // image_type - свойство родителя
-			$stmt = $this->connection->prepare("
+			$stmt = self::$connection->prepare("
 				UPDATE users
 				SET avatar_name = ?
 				WHERE id = ?
 				");
-			$stmt->bind_param('si', $this->temp_avatar_name,  $this->user->id);
+			$stmt->bind_param('si', $this->temp_avatar_name,  $this->user->user_id);
 			$stmt->execute();
 
 			// Удаление старой аватарки если она существует
