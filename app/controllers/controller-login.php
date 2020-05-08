@@ -1,52 +1,47 @@
 <?php
 class Controller_Login extends Controller
 {
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 
 		$this->styles[] = 'forms-login-sign-up.css';
 	}
-	function action_index()
+	public function action_index()
 	{
 		$this->title = 'Вход';
 		$this->own_view_path = 'login-view.php';
+		
 		if(isset($_SESSION['user_id']))
 			$this->go_home();
 
-		$error_messege = NULL;
 		if(!empty($_POST))
 		{
 			if(!empty($_POST['login'])
 				&& !empty($_POST['pswd']))
 			{
 				$guest = new Model_User($_POST);
-				$successful_query = $guest->verify_pswd();
+				$successful_query = $guest->verifyPswd();
 
-				if($successful_query)
+				if($successful_query['id'] !== false)
 					{
-						$_SESSION['user_id'] = $successful_query;
+						$_SESSION['user_id'] = $successful_query['id'];
+						$_SESSION['role'] = $successful_query['role'];
 						$this->go_home();
 					}
 				else
-					$error_messege = 'Не верный логин или пароль';
+					$this->error_message = 'Не верный логин или пароль';
 			}
 			else
-				$error_messege = 'Заполните все поля';
-			
-			// Успешная авторизация
-			if($successful_query == true)
-				$this->go_home();
+				$this->error_message = 'Заполните все поля';
 		}
 
-		$this->data = array(
-			'styles' => $this->styles,
-			'error_messege' => $error_messege
-		);
+		$this->setData(null);
+
 		$this->view->generate($this->title, $this->own_view_path, $this->template_view_path, $this->data);
 	}
 
-	function action_logout()
+	public function action_logout()
 	{
 		session_destroy();
 		header("Location: /");

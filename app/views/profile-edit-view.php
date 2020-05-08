@@ -7,7 +7,7 @@
 		</label>
 		<input id="photo_new"  type="file" name="photo">
 		<button class="buttons commit">Сохранить фото</button>
-		<span class="error_messege"><?php if(!empty($_FILES)) echo $data['error_messege']; ''?></span>
+		<span class="error_message"><?php if(!empty($_FILES)) echo $data['error_message']; ''?></span>
 	</form>
 </div>
 
@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	<div class="field">
-		<?php if(!empty($data['error_messege']['login'])) echo $data['error_messege']['login']; ?>
+		<?php if(!empty($data['error_message']['login'])) echo $data['error_message']['login']; ?>
 	</div>
 
 	<div class="field">
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 	<div class="field">
-		<?php if(!empty($data['error_messege']['email'])) echo $data['error_messege']['email']; ?>
+		<?php if(!empty($data['error_message']['email'])) echo $data['error_message']['email']; ?>
 	</div>
 	<div class="field">
 		<button  class="buttons commit" value="submit" form="data_updating">Сохранить данные</button>
@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	<div class="field">
-		<?php if(!empty($data['error_messege']['pswd'])) echo $data['error_messege']['pswd']; ?>
+		<?php if(!empty($data['error_message']['pswd'])) echo $data['error_message']['pswd']; ?>
 	</div>
 	
 	<div class="field">

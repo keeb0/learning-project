@@ -8,7 +8,7 @@ class Model_User_Avatar extends Model_Image
 
 	const DEFAULT_AVATAR = '/web/user-photos/avatars/default-avatar/avatar.png';
 
-	function __construct($user_data)
+	public function __construct($user_data)
 	{
 		parent::__construct();
 
@@ -19,19 +19,19 @@ class Model_User_Avatar extends Model_Image
 		
 	}
 
-	function get_user_avatar()
+	public function getAvatar()
 	{
 		// Указываем путь к существующей аватарке иначе к дефолтному аватару всех пользователей
-		if(!empty($this->user->avatar_name))
+		if (!empty($this->user->avatar_name))
 			$this->path = $this->directory_get.'/'.$this->user->avatar_name;
 		else
 			$this->path = self::DEFAULT_AVATAR;
 	}
 
-	function upload_user_avatar($image_data)
+	public function uploadAvatar($image_data)
 	{
 		// Создаём директорию аватарки если таковой нет
-		if(!file_exists($this->directory_upload))
+		if (!file_exists($this->directory_upload))
 			mkdir($this->directory_upload);
 
 		// Задаем хэш имя аватарке
@@ -39,8 +39,7 @@ class Model_User_Avatar extends Model_Image
 
 		$success_upload = $this->upload_image($image_data, $this->temp_avatar_name, $this->directory_upload);
 
-		if($success_upload)
-		{
+		if ($success_upload) {
 			// Запись нового имени аватара в БД
 			$this->temp_avatar_name .= '.'.$this->image_type; // image_type - свойство родителя
 			$stmt = self::$connection->prepare("
@@ -52,7 +51,7 @@ class Model_User_Avatar extends Model_Image
 			$stmt->execute();
 
 			// Удаление старой аватарки если она существует
-			if(!empty($this->user->avatar_name))
+			if (!empty($this->user->avatar_name))
 				unlink($this->directory_upload.'/'.$this->user->avatar_name);
 
 			// Обновляем страницу

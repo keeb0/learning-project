@@ -1,7 +1,7 @@
 <?php
 class Route 
 {
-	function start()
+	public function start()
 	{
 		$controller_name = 'Main';
 		$action_name = 'index';
@@ -62,7 +62,7 @@ class Route
 			Route::error_404();
 	}
 
-	function error_404()
+	public function error_404()
 	{
 		require_once 'app/controllers/controller-404.php';
 

@@ -34,13 +34,13 @@
 	padding: 6px;
 	border:1px solid #FFE544;
 	background-color: #FFE544;
+	color: #000;
 }
 .commit{
 	background-color: #3289DF;
 	border:1px solid #3289DF;
 	color: #fff;
 }
-
 .messege{
 	width: 300px;
 }

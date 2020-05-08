@@ -1,9 +1,7 @@
 <?php
 class Model_Search_User extends Model
 {
-	public $logins = [];
-	public $id = [];
-	function search_user($desired_user_data)
+	public function search($desired_user_data)
 	{
 		$desired_user_data .= '%';
 
@@ -18,13 +16,11 @@ class Model_Search_User extends Model
 		self::$connection->close();
 
 		for($i = 0; $i < $amount_of_users; $i++)
-		{
-			$this->row[$i] = $result_set->fetch_assoc();
-			$this->logins[$i] = $this->row[$i]['login'];
-			$this->id[$i] = $this->row[$i]['id'];
-		}
-		if(empty($this->logins))
-			$this->error_messege = 'Не найдено совпадений по вашему запросу';
+			$matching_users[$i] = $result_set->fetch_assoc();
 
+		if(!empty($matching_users))
+			return $matching_users;
+
+		$this->error_message = 'Не найдено совпадений по вашему запросу';
 	}
 }

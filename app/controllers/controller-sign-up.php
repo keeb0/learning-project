@@ -1,14 +1,14 @@
 <?php
 class Controller_Sign_Up extends Controller
 {
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 
 		$this->styles[] = 'forms-login-sign-up.css';
 		$this->scripts[] = 'script-sign-up.js';
 	}
-	function action_index()
+	public function action_index()
 	{
 		$this->title = 'Регистрация';
 		$this->own_view_path = 'sign-up-view.php';
@@ -16,22 +16,18 @@ class Controller_Sign_Up extends Controller
 		if(isset($_SESSION['user_id']))
 			$this->go_home();
 
-		$error_messege = NULL;
 		if(!empty($_POST))
 		{
 			$new_user = new Model_User($_POST);
-			$error_messege = $new_user->create_user();
+			$this->error_message = $new_user->create();
 
 			// Успешная регистрация
-			if($error_messege === 1)
+			if($this->error_message === 1)
 				$this->go_home();
 		}
 
-		$this->data = array(
-			'styles' => $this->styles,
-			'scripts' => $this->scripts,
-			'error_messege' => $error_messege
-		);
+		$this->setData(null);
+		
 		$this->view->generate($this->title, $this->own_view_path, $this->template_view_path, $this->data);
 	}
 }

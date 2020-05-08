@@ -4,10 +4,9 @@ class Model_Image extends Model
 	public $photos_main_path = '/web/user-photos';
 	public $image_type;
 
-	function upload_image($image_data, $name, $path)
+	public function upload_image($image_data, $name, $path)
 	{
-		switch ($image_data['type']) 
-		{
+		switch ($image_data['type']) {
 			case 'image/png':
 				$this->image_type = 'png';
 				break;
@@ -21,8 +20,7 @@ class Model_Image extends Model
 				$this->image_type = '';
 				break;
 		}
-		if ($this->image_type)
-		{
+		if ($this->image_type) {
 			$image = new Imagick($image_data['tmp_name']);
 			$image->thumbnailImage(250, 0);
 			$image->writeImage($_SERVER['DOCUMENT_ROOT'].'/'.$path.'/'.$name.'.'.$this->image_type);
@@ -33,7 +31,7 @@ class Model_Image extends Model
 			return 0;
 	}
 
-	function delete_image()
+	public function delete_image()
 	{
 		
 	}

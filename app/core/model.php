@@ -2,15 +2,15 @@
 class Model
 {
 	static $connection;
-	public $error_messege = 0;
+	public $error_message = null;
 
-	function __construct()
+	public function __construct()
 	{
 		self::$connection = new mysqli('localhost', 'admin', '123456', 'chat');
 		self::$connection->query("SET NAMES 'utf8'");
 	}
 
-	function __destruct()
+	public function __destruct()
 	{
 		// self::$connection->close();
 	}

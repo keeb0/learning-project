@@ -4,14 +4,14 @@
 		<input type="text" name="login" id="user_login" value="saddsa">
 	</div>
 	<div class="field">
-		<?php !empty($data['error_messege']['login']) ? print $data['error_messege']['login'] : '' ; ?>
+		<?php !empty($data['error_message']['login']) ? print $data['error_message']['login'] : '' ; ?>
 	</div>
 	<div class="field">
 		<label for="user_pswd">Пароль:</label>
 		<input type="password" name="pswd_new" id="user_pswd">
 	</div>
 	<div class="field">
-		<?php !empty($data['error_messege']['pswd']) ? print $data['error_messege']['pswd'] : '' ; ?>
+		<?php !empty($data['error_message']['pswd']) ? print $data['error_message']['pswd'] : '' ; ?>
 	</div>
 	<div class="field">
 	<div class="field">
@@ -23,7 +23,7 @@
 		<input type="text" name="email" id="user_email">
 	</div>
 	<div class="field">
-		<?php !empty($data['error_messege']['email']) ? print $data['error_messege']['email'] : '' ; ?>
+		<?php !empty($data['error_message']['email']) ? print $data['error_message']['email'] : '' ; ?>
 	</div>
 	<div class="field">
 		<input class="buttons" type="submit" value="Зарегистрироваться" name="submit" id="user_submit">
