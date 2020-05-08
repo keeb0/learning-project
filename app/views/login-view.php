@@ -15,6 +15,10 @@
 	</div>
 
 	<div class="field">
+<<<<<<< HEAD
 		<?php !empty($data) ? print $data['error_message'] : ""; ?>
+=======
+		<?php !empty($data) ? print $data['error_messege'] : ""; ?>
+>>>>>>> 9794ce286165c8ad8244a59ea0eee19bb5da1782
 	</div>
 </form>

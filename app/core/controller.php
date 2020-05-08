@@ -8,11 +8,14 @@ class Controller
 	public $own_view_path;
 	public $title;
 	public $data;
+<<<<<<< HEAD
 	public $error_message = null;
 	public $styles = null;
 	public $scripts = null;
 
 	const USER_MODEL_DIR = 'app/models/user-models/';
+=======
+>>>>>>> 9794ce286165c8ad8244a59ea0eee19bb5da1782
 
 	public function __construct()
 	{

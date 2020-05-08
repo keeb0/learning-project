@@ -7,7 +7,11 @@
 		</label>
 		<input id="photo_new"  type="file" name="photo">
 		<button class="buttons commit">Сохранить фото</button>
+<<<<<<< HEAD
 		<span class="error_message"><?php if(!empty($_FILES)) echo $data['error_message']; ''?></span>
+=======
+		<span class="error_messege"><?php if(!empty($_FILES)) echo $data['error_messege']; ''?></span>
+>>>>>>> 9794ce286165c8ad8244a59ea0eee19bb5da1782
 	</form>
 </div>
 
@@ -27,7 +31,11 @@
 		</div>
 	</div>
 	<div class="field">
+<<<<<<< HEAD
 		<?php if(!empty($data['error_message']['login'])) echo $data['error_message']['login']; ?>
+=======
+		<?php if(!empty($data['error_messege']['login'])) echo $data['error_messege']['login']; ?>
+>>>>>>> 9794ce286165c8ad8244a59ea0eee19bb5da1782
 	</div>
 
 	<div class="field">
@@ -43,7 +51,11 @@
 		</div>
 	</div>
 	<div class="field">
+<<<<<<< HEAD
 		<?php if(!empty($data['error_message']['email'])) echo $data['error_message']['email']; ?>
+=======
+		<?php if(!empty($data['error_messege']['email'])) echo $data['error_messege']['email']; ?>
+>>>>>>> 9794ce286165c8ad8244a59ea0eee19bb5da1782
 	</div>
 	<div class="field">
 		<button  class="buttons commit" value="submit" form="data_updating">Сохранить данные</button>
@@ -72,7 +84,11 @@
 		</div>
 	</div>
 	<div class="field">
+<<<<<<< HEAD
 		<?php if(!empty($data['error_message']['pswd'])) echo $data['error_message']['pswd']; ?>
+=======
+		<?php if(!empty($data['error_messege']['pswd'])) echo $data['error_messege']['pswd']; ?>
+>>>>>>> 9794ce286165c8ad8244a59ea0eee19bb5da1782
 	</div>
 	
 	<div class="field">

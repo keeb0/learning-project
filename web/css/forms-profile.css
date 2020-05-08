@@ -6,7 +6,13 @@
 	padding-top: 20px;
 }
 .user_photo_block img{
-	height: 230px;
+	width: 170px;
+}
+.role{
+	border-radius: 4px;
+	border: 1px solid black;
+	font-size: 18px;
+	text-align: center;
 }
 .new_photo_form{
 	margin-top: 30px;
